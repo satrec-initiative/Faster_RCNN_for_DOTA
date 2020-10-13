@@ -71,11 +71,11 @@ class Point:
 
             if d_y:
                 delta = 1. * d_x / d_y
-                for i in xrange(0, d_x):
+                for i in range(0, d_x):
                     yield Point(self.x + i * s_x, self.y + i * s_x / delta)
             elif d_x:
                 delta = 1. * d_y / d_x
-                for i in xrange(0, d_y):
+                for i in range(0, d_y):
                     yield Point(self.y + i * s_y / delta, self.y + i * s_y)
 
 
@@ -206,5 +206,5 @@ def longtail(file_path, segmentation_map):
     return sorted_points_pairs
 
 if __name__ == '__main__':
-    print isInsidePolygon((2, 2), [(0, 0), (2, 0), (2, 2), (0, 2)])
-    print getAllPointsInQuadrangles([(0, 0), (2, 0), (4, 4), (0, 2)])
+    print (isInsidePolygon((2, 2), [(0, 0), (2, 0), (2, 2), (0, 2)]))
+    print (getAllPointsInQuadrangles([(0, 0), (2, 0), (4, 4), (0, 2)]))

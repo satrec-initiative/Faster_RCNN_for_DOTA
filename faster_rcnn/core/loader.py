@@ -13,7 +13,7 @@ from mxnet.executor_manager import _split_input_slice
 from config.config import config
 from utils.image import tensor_vstack
 from rpn.rpn import get_rpn_testbatch, get_rpn_batch, assign_anchor, get_rpn_batch_quadrangle, assign_quadrangle_anchor, get_rpn_quadrangle_testbatch
-from rcnn import get_rcnn_testbatch, get_rcnn_batch
+from core.rcnn import get_rcnn_testbatch, get_rcnn_batch
 
 
 class TestLoader(mx.io.DataIter):
@@ -259,11 +259,11 @@ class ROIIter(mx.io.DataIter):
 
     @property
     def provide_data(self):
-        return [[(k, v.shape) for k, v in zip(self.data_name, self.data[i])] for i in xrange(len(self.data))]
+        return [[(k, v.shape) for k, v in zip(self.data_name, self.data[i])] for i in range(len(self.data))]
 
     @property
     def provide_label(self):
-        return [[(k, v.shape) for k, v in zip(self.label_name, self.label[i])] for i in xrange(len(self.data))]
+        return [[(k, v.shape) for k, v in zip(self.label_name, self.label[i])] for i in range(len(self.data))]
 
     @property
     def provide_data_single(self):
@@ -436,11 +436,11 @@ class AnchorLoader(mx.io.DataIter):
 
     @property
     def provide_data(self):
-        return [[(k, v.shape) for k, v in zip(self.data_name, self.data[i])] for i in xrange(len(self.data))]
+        return [[(k, v.shape) for k, v in zip(self.data_name, self.data[i])] for i in range(len(self.data))]
 
     @property
     def provide_label(self):
-        return [[(k, v.shape) for k, v in zip(self.label_name, self.label[i])] for i in xrange(len(self.data))]
+        return [[(k, v.shape) for k, v in zip(self.label_name, self.label[i])] for i in range(len(self.data))]
 
     @property
     def provide_data_single(self):
@@ -660,11 +660,11 @@ class QuadrangleAnchorLoader(mx.io.DataIter):
 
     @property
     def provide_data(self):
-        return [[(k, v.shape) for k, v in zip(self.data_name, self.data[i])] for i in xrange(len(self.data))]
+        return [[(k, v.shape) for k, v in zip(self.data_name, self.data[i])] for i in range(len(self.data))]
 
     @property
     def provide_label(self):
-        return [[(k, v.shape) for k, v in zip(self.label_name, self.label[i])] for i in xrange(len(self.data))]
+        return [[(k, v.shape) for k, v in zip(self.label_name, self.label[i])] for i in range(len(self.data))]
 
     @property
     def provide_data_single(self):

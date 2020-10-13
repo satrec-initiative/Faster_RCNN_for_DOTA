@@ -18,7 +18,10 @@ sys.path.insert(0, os.path.join(this_dir, '..', '..', 'faster_rcnn'))
 import train_quadrangle_end2end
 import test_dota_quadrangle
 
-if __name__ == "__main__":
+def main():
     # train_end2end.main()
     train_quadrangle_end2end.main()
     test_dota_quadrangle.main()
+
+if __name__ == "__main__":
+    main()

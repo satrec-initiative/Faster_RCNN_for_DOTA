@@ -36,7 +36,7 @@ def get_polygon_areas(dets):
     num = dets.shape[0]
     polygon_points = dets.reshape(-1, 4, 2)
     areas = []
-    for i in xrange(num):
+    for i in range(num):
         # x1 = dets[i, 0]
         # y1 = dets[i, 1]
         # x2 = dets[i, 2]
@@ -91,7 +91,7 @@ def nms(dets, thresh):
         # h = np.maximum(0.0, yy2 - yy1 + 1)
         # inter = w * h
         inter = []
-        for h in xrange(xx1.shape[0]):
+        for h in range(xx1.shape[0]):
             inter.append(Polygon([(xx1[h], yy1[h]), (xx2[h], yy2[h]), (xx3[h], yy3[h]), (xx4[h], yy4[h])]).convex_hull.area)
         inter = np.array(inter)
         # inter = Polygon([(xx1, yy1), (xx2, yy2), (xx3, yy3), (xx4, yy4)]).area

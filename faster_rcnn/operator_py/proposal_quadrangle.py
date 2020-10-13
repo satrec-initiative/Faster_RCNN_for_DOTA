@@ -30,9 +30,9 @@ class ProposalQuadrangleOperator(mx.operator.CustomOp):
         self._rpn_min_size = rpn_min_size
 
         if DEBUG:
-            print 'feat_stride: {}'.format(self._feat_stride)
-            print 'anchors:'
-            print self._anchors
+            print ('feat_stride: {}'.format(self._feat_stride))
+            print ('anchors:')
+            print (self._anchors)
 
     def forward(self, is_train, req, in_data, out_data, aux):
         nms = gpu_nms_wrapper(self._threshold, in_data[0].context.device_id)
@@ -63,16 +63,16 @@ class ProposalQuadrangleOperator(mx.operator.CustomOp):
         im_info = in_data[2].asnumpy()[0, :]
 
         if DEBUG:
-            print 'im_size: ({}, {})'.format(im_info[0], im_info[1])
-            print 'scale: {}'.format(im_info[2])
+            print ('im_size: ({}, {})'.format(im_info[0], im_info[1]))
+            print ('scale: {}'.format(im_info[2]))
 
         # 1. Generate proposals from bbox_deltas and shifted anchors
         # use real image size instead of padded feature map sizes
         height, width = int(im_info[0] / self._feat_stride), int(im_info[1] / self._feat_stride)
 
         if DEBUG:
-            print 'score map size: {}'.format(scores.shape)
-            print "resudial: {}".format((scores.shape[2] - height, scores.shape[3] - width))
+            print ('score map size: {}'.format(scores.shape))
+            print ("resudial: {}".format((scores.shape[2] - height, scores.shape[3] - width)))
 
         # Enumerate all shifts
         shift_x = np.arange(0, width) * self._feat_stride
@@ -99,7 +99,7 @@ class ProposalQuadrangleOperator(mx.operator.CustomOp):
         # reshape to (1 * H * W * A, 4) where rows are ordered by (h, w, a)
         # in slowest to fastest order
         # temp_boxes = np.zeros((bbox_deltas.shape[0], bbox_deltas.shape[1] / 2, bbox_deltas.shape[2], bbox_deltas.shape[3]), dtype=bbox_deltas.dtype)
-        # for i in xrange(self._num_anchors):
+        # for i in range(self._num_anchors):
         #     x1 = bbox_deltas[:, i * 0, :, :].reshape((-1))
         #     y1 = bbox_deltas[:, i * 1, :, :].reshape((-1))
         #     x2 = bbox_deltas[:, i * 2, :, :].reshape((-1))

@@ -252,11 +252,11 @@ def test_rcnn_dota_quadrangle(cfg, dataset, image_set, root_path, dataset_path,
         roidb = eval('imdb.' + proposal + '_roidb')(gt_roidb)
 
     if cfg.TEST.DO_MULTISCALE_TEST:
-        print "multiscale test!"
+        print ("multiscale test!")
         multiscales = np.array(cfg.TEST.MULTISCALE)
         original_scales = cfg.SCALES
         for scale in multiscales:
-            print "scale: {}".format(scale)
+            print ("scale: {}".format(scale))
             cfg.SCALES[0] = (int(original_scales[0][0] * scale), int(original_scales[0][1] * scale))
             # get test data iter
             test_data = QuadrangleTestLoader(roidb, cfg, batch_size=len(ctx), shuffle=shuffle, has_rpn=has_rpn)

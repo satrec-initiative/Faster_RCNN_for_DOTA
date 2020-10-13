@@ -56,7 +56,7 @@ def get_image_quadrangle_bboxes(roidb, config):
         roi_rec = roidb[i]
         assert os.path.exists(roi_rec['image']), '%s does not exist'.format(roi_rec['image'])
         im = cv2.imread(roi_rec['image'], cv2.IMREAD_COLOR|cv2.IMREAD_IGNORE_ORIENTATION)
-        # print im
+        # print (im)
         if roidb[i]['flipped']:
             im = im[:, ::-1, :]
         new_rec = roi_rec.copy()
@@ -64,7 +64,7 @@ def get_image_quadrangle_bboxes(roidb, config):
         target_size = config.SCALES[scale_ind][0]
         max_size = config.SCALES[scale_ind][1]
         im, im_scale = resize(im, target_size, max_size, stride=config.network.IMAGE_STRIDE)
-        # print im
+        # print (im)
         im_tensor = transform(im, config.network.PIXEL_MEANS)
         processed_ims.append(im_tensor)
         # get rid of image scale here, original im_info = [im_tensor.shape[2], im_tensor.shape[3], im_scale]
@@ -125,7 +125,7 @@ def get_image_quadrangle_bboxes_test(roidb, config):
         roi_rec = roidb[i]
         assert os.path.exists(roi_rec['image']), '%s does not exist'.format(roi_rec['image'])
         im = cv2.imread(roi_rec['image'], cv2.IMREAD_COLOR|cv2.IMREAD_IGNORE_ORIENTATION)
-        # print im
+        # print (im)
         # if roidb[i]['flipped']:
         #     im = im[:, ::-1, :]
         new_rec = roi_rec.copy()
@@ -133,7 +133,7 @@ def get_image_quadrangle_bboxes_test(roidb, config):
         target_size = config.SCALES[scale_ind][0]
         max_size = config.SCALES[scale_ind][1]
         im, im_scale = resize(im, target_size, max_size, stride=config.network.IMAGE_STRIDE)
-        # print im
+        # print (im)
         im_tensor = transform(im, config.network.PIXEL_MEANS)
         processed_ims.append(im_tensor)
         # get rid of image scale here, original im_info = [im_tensor.shape[2], im_tensor.shape[3], im_scale]

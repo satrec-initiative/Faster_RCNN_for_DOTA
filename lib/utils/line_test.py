@@ -16,4 +16,4 @@ def isInsidePolygon(pt, poly):
 
 if __name__ == '__main__':
     abc = [(1, 1), (1, 4), (3, 7), (4, 4), (4, 1)]
-    print isInsidePolygon((3, 3), abc)
+    print (isInsidePolygon((3, 3), abc))

@@ -18,7 +18,8 @@ from config.config import config, update_config
 def parse_args():
     parser = argparse.ArgumentParser(description='Test a Faster R-CNN network')
     # general
-    parser.add_argument('--cfg', help='experiment configure file name', required=True, type=str)
+    parser.add_argument('--cfg', help='experiment configure file name',
+                        default='Faster_RCNN_for_DOTA/experiments/faster_rcnn/cfgs/DOTA_quadrangle.yaml', type=str)
 
     args, rest = parser.parse_known_args()
     update_config(args.cfg)
@@ -42,7 +43,7 @@ from utils.create_logger import create_logger
 
 def main():
     ctx = [mx.gpu(int(i)) for i in config.gpus.split(',')]
-    print args
+    print (args)
 
     logger, final_output_path = create_logger(config.output_path, args.cfg, config.dataset.test_image_set)
 

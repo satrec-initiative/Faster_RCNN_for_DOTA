@@ -36,10 +36,10 @@ class Symbol:
     def infer_shape(self, data_shape_dict):
         # infer shape
         arg_shape, out_shape, aux_shape = self.sym.infer_shape(**data_shape_dict)
-        # print self.sym.list_arguments()
-        # print arg_shape
+        # print (self.sym.list_arguments())
+        # print (arg_shape)
         self.arg_shape_dict = dict(zip(self.sym.list_arguments(), arg_shape))
-        # print self.arg_shape_dict
+        # print (self.arg_shape_dict)
         self.out_shape_dict = dict(zip(self.sym.list_outputs(), out_shape))
         self.aux_shape_dict = dict(zip(self.sym.list_auxiliary_states(), aux_shape))
 

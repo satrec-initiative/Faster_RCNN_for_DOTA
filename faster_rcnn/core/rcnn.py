@@ -234,7 +234,7 @@ def sample_rois_quadrangle(rois, fg_rois_per_image, rois_per_image, num_classes,
     bg_rois_per_this_image = np.minimum(bg_rois_per_this_image, bg_indexes.size)
     # Sample foreground regions without replacement
     if len(bg_indexes) > bg_rois_per_this_image:
-        bg_indexes = npr.choice(bg_indexes, size=bg_rois_per_this_image, replace=False)
+        bg_indexes = npr.choice(bg_indexes, size=int(bg_rois_per_this_image), replace=False)
 
     # indexes selected
     keep_indexes = np.append(fg_indexes, bg_indexes)
@@ -242,7 +242,7 @@ def sample_rois_quadrangle(rois, fg_rois_per_image, rois_per_image, num_classes,
     # pad more to ensure a fixed minibatch size
     while keep_indexes.shape[0] < rois_per_image:
         gap = np.minimum(len(rois), rois_per_image - keep_indexes.shape[0])
-        gap_indexes = npr.choice(range(len(rois)), size=gap, replace=False)
+        gap_indexes = npr.choice(range(len(rois)), size=int(gap), replace=False)
         keep_indexes = np.append(keep_indexes, gap_indexes)
 
     # select labels

@@ -14,7 +14,7 @@ import mxnet as mx
 import numpy as np
 from distutils.util import strtobool
 from easydict import EasyDict as edict
-import cPickle
+import pickle
 from core.rcnn import sample_rois_quadrangle
 
 DEBUG = False
@@ -82,21 +82,20 @@ class ProposalTargetQuadrangleOperator(mx.operator.CustomOp):
         all_rois = np.vstack((all_rois, np.hstack((zeros, gt_boxes_bbox[:, :-1]))))
         # Sanity check: single batch only
         assert np.all(all_rois[:, 0] == 0), 'Only single item batches are supported'
-
         rois, labels, bbox_targets, bbox_weights = \
             sample_rois_quadrangle(all_rois, fg_rois_per_image, rois_per_image, self._num_classes, self._cfg, gt_boxes=gt_boxes)
 
         if DEBUG:
-            print "labels=", labels
-            print 'num fg: {}'.format((labels > 0).sum())
-            print 'num bg: {}'.format((labels == 0).sum())
+            print ("labels=", labels)
+            print ('num fg: {}'.format((labels > 0).sum()))
+            print ('num bg: {}'.format((labels == 0).sum()))
             self._count += 1
             self._fg_num += (labels > 0).sum()
             self._bg_num += (labels == 0).sum()
-            print "self._count=", self._count
-            print 'num fg avg: {}'.format(self._fg_num / self._count)
-            print 'num bg avg: {}'.format(self._bg_num / self._count)
-            print 'ratio: {:.3f}'.format(float(self._fg_num) / float(self._bg_num))
+            print ("self._count=", self._count)
+            print ('num fg avg: {}'.format(self._fg_num / self._count))
+            print ('num bg avg: {}'.format(self._bg_num / self._count))
+            print ('ratio: {:.3f}'.format(float(self._fg_num) / float(self._bg_num)))
 
         for ind, val in enumerate([rois, labels, bbox_targets, bbox_weights]):
             self.assign(out_data[ind], req[ind], val)
@@ -113,7 +112,7 @@ class ProposalTargetQuadrangleProp(mx.operator.CustomOpProp):
         self._num_classes = int(num_classes)
         self._batch_images = int(batch_images)
         self._batch_rois = int(batch_rois)
-        self._cfg = cPickle.loads(cfg)
+        self._cfg = pickle.loads(eval(cfg))
         self._fg_fraction = float(fg_fraction)
 
     def list_arguments(self):

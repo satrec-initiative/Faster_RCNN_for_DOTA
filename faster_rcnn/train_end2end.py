@@ -18,7 +18,8 @@ from config.config import config, update_config
 def parse_args():
     parser = argparse.ArgumentParser(description='Train Faster-RCNN network')
     # general
-    parser.add_argument('--cfg', help='experiment configure file name', required=True, type=str)
+    # parser.add_argument('--cfg', help='experiment configure file name', required=True, type=str)
+    parser.add_argument('--cfg', help='experiment configure file name', default='Faster_RCNN_for_DOTA/experiments/faster_rcnn/cfgs/DOTA_custom.ymal', type=str)
 
     args, rest = parser.parse_known_args()
     # update config
@@ -37,15 +38,15 @@ import shutil
 import numpy as np
 import mxnet as mx
 
-from symbols import *
-from core import callback, metric
-from core.loader import AnchorLoader
-from core.module import MutableModule
-from utils.create_logger import create_logger
-from utils.load_data import load_gt_roidb, merge_roidb, filter_roidb
-from utils.load_model import load_param
-from utils.PrefetchingIter import PrefetchingIter
-from utils.lr_scheduler import WarmupMultiFactorScheduler
+from faster_rcnn.symbols import *
+from faster_rcnn.core import callback, metric
+from faster_rcnn.core.loader import AnchorLoader
+from faster_rcnn.core.module import MutableModule
+from lib.utils.create_logger import create_logger
+from lib.utils.load_data import load_gt_roidb, merge_roidb, filter_roidb
+from lib.utils.load_model import load_param
+from lib.utils.PrefetchingIter import PrefetchingIter
+from lib.utils.lr_scheduler import WarmupMultiFactorScheduler
 
 
 def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch, lr, lr_step):
@@ -84,7 +85,7 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch, lr, 
     max_data_shape = [('data', (config.TRAIN.BATCH_IMAGES, 3, max([v[0] for v in config.SCALES]), max([v[1] for v in config.SCALES])))]
     max_data_shape, max_label_shape = train_data.infer_shape(max_data_shape)
     max_data_shape.append(('gt_boxes', (config.TRAIN.BATCH_IMAGES, 100, 5)))
-    print 'providing maximum shape', max_data_shape, max_label_shape
+    print( 'providing maximum shape', max_data_shape, max_label_shape)
 
     data_shape_dict = dict(train_data.provide_data_single + train_data.provide_label_single)
     pprint.pprint(data_shape_dict)
@@ -96,7 +97,7 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch, lr, 
         arg_params, aux_params = load_param(prefix, begin_epoch, convert=True)
     else:
         arg_params, aux_params = load_param(pretrained, epoch, convert=True)
-        print arg_params, aux_params
+        print( arg_params, aux_params)
         sym_instance.init_weight(config, arg_params, aux_params)
 
     # check parameter shapes
@@ -161,6 +162,7 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch, lr, 
 def main():
     print('Called with argument:', args)
     ctx = [mx.gpu(int(i)) for i in config.gpus.split(',')]
+    # ctx = [mx.cpu(0)]
     train_net(args, ctx, config.network.pretrained, config.network.pretrained_epoch, config.TRAIN.model_prefix,
               config.TRAIN.begin_epoch, config.TRAIN.end_epoch, config.TRAIN.lr, config.TRAIN.lr_step)
 

@@ -18,7 +18,8 @@ from config.config import config, update_config
 def parse_args():
     parser = argparse.ArgumentParser(description='Train Faster-RCNN network')
     # general
-    parser.add_argument('--cfg', help='experiment configure file name', required=True, type=str)
+    parser.add_argument('--cfg', help='experiment configure file name', type=str,
+                        default='Faster_RCNN_for_DOTA/experiments/faster_rcnn/cfgs/DOTA_custom.yaml')
 
     args, rest = parser.parse_known_args()
     # update config
@@ -26,8 +27,8 @@ def parse_args():
 
     # training
     parser.add_argument('--frequent', help='frequency of logging', default=config.default.frequent, type=int)
-    args = parser.parse_args()
-    return args
+    args = parser.parse_known_args()
+    return args[0]
 
 args = parse_args()
 curr_path = os.path.abspath(os.path.dirname(__file__))
@@ -85,7 +86,7 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch, lr, 
     max_data_shape, max_label_shape = train_data.infer_shape(max_data_shape)
     # why here? why 100 and 5?
     max_data_shape.append(('gt_boxes', (config.TRAIN.BATCH_IMAGES, 100, 9)))
-    print 'providing maximum shape', max_data_shape, max_label_shape
+    print('providing maximum shape', max_data_shape, max_label_shape)
 
     data_shape_dict = dict(train_data.provide_data_single + train_data.provide_label_single)
     pprint.pprint(data_shape_dict)
@@ -160,7 +161,8 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch, lr, 
 
 def main():
     print('Called with argument:', args)
-    ctx = [mx.gpu(int(i)) for i in config.gpus.split(',')]
+    # ctx = [mx.gpu(int(i)) for i in config.gpus.split(',')]
+    ctx = [mx.cpu(0)]
     train_net(args, ctx, config.network.pretrained, config.network.pretrained_epoch, config.TRAIN.model_prefix,
               config.TRAIN.begin_epoch, config.TRAIN.end_epoch, config.TRAIN.lr, config.TRAIN.lr_step)
 

@@ -13,11 +13,11 @@ function. Results are written as the Pascal VOC format. Evaluation is based on m
 criterion.
 """
 
-import cPickle
+import pickle
 import os
 import numpy as np
 
-from imdb import IMDB
+from dataset.imdb import IMDB
 import cv2
 import zipfile
 from bbox.bbox_transform import bbox_overlaps, bbox_transform, bbox_transform_quadrangle, bbox_pred_quadrangle
@@ -47,7 +47,7 @@ class UCAS(IMDB):
         self.num_classes = len(self.classes)
         self.image_set_index = self.load_image_set_index()
         self.num_images = len(self.image_set_index)
-        print 'num_images', self.num_images
+        print ('num_images', self.num_images)
         self.mask_size = mask_size
         self.binary_thresh = binary_thresh
 
@@ -87,14 +87,14 @@ class UCAS(IMDB):
         cache_file = os.path.join(self.cache_path, self.name + '_gt_roidb.pkl')
         if os.path.exists(cache_file):
             with open(cache_file, 'rb') as fid:
-                roidb = cPickle.load(fid)
-            print '{} gt roidb loaded from {}'.format(self.name, cache_file)
+                roidb = pickle.load(fid)
+            print ('{} gt roidb loaded from {}'.format(self.name, cache_file))
             return roidb
 
         gt_roidb = [self.load_annotation(index) for index in self.image_set_index]
         with open(cache_file, 'wb') as fid:
-            cPickle.dump(gt_roidb, fid, cPickle.HIGHEST_PROTOCOL)
-        print 'wrote gt roidb to {}'.format(cache_file)
+            pickle.dump(gt_roidb, fid, pickle.HIGHEST_PROTOCOL)
+        print ('wrote gt roidb to {}'.format(cache_file))
 
         return gt_roidb
 
@@ -184,7 +184,7 @@ class UCAS(IMDB):
         """
         path = os.path.join(self.result_path, 'test_results')
         if os.path.isdir(path):
-            print "delete original test results files!"
+            print ("delete original test results files!")
             os.system("rm -r {}".format(path))
             os.mkdir(path)
         for cls_ind, cls in enumerate(self.classes):

@@ -1,6 +1,6 @@
-from imdb import IMDB
-from pascal_voc import PascalVOC
-from cityscape import CityScape
-from coco import coco
-from DOTA import DOTA_oriented,DOTA
-from UCAS import UCAS
+from dataset.imdb import IMDB
+from dataset.pascal_voc import PascalVOC
+from dataset.cityscape import CityScape
+from dataset.coco import coco
+from dataset.DOTA import DOTA_oriented,DOTA, DOTA_custom
+from dataset.UCAS import UCAS

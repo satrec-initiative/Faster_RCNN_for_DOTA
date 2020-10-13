@@ -1,3 +1,3 @@
-import resnet_v1_101_rcnn
-import resnet_v1_101_rcnn_dcn
-import resnet_v1_101_rcnn_quadrangle
+import symbols.resnet_v1_101_rcnn
+import symbols.resnet_v1_101_rcnn_dcn
+import symbols.resnet_v1_101_rcnn_quadrangle
