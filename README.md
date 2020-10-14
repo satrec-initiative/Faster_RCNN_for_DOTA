@@ -18,15 +18,14 @@ Note that in order to achieve better results, we adjusted the order of the quadr
 
 1. MXNet from [the offical repository](https://github.com/dmlc/mxnet). We tested our code on [MXNet@(commit 62ecb60)](https://github.com/dmlc/mxnet/tree/62ecb60). Due to the rapid development of MXNet, it is recommended to checkout this version if you encounter any issues. 
 
-2. Python 2.7. We recommend using Anaconda2 to manage the environments and packages.
-
-3. Some python packages: cython, opencv-python >= 3.2.0, easydict. If `pip` is set up on your system, those packages should be able to be fetched and installed by running:
+2. Some python packages: cython, opencv-python >= 3.2.0, easydict. If `pip` is set up on your system, those packages should be able to be fetched and installed by running:
 ```
 pip install Cython
 pip install opencv-python==3.2.0.6
 pip install easydict==1.6
+pip install mxnet-cu101==1.5.1
 ```
-4. For Windows users, Visual Studio 2015 is needed to compile cython module.
+3. For Windows users, Visual Studio 2015 is needed to compile cython module.
 
 
 ## Requirements: Hardware
@@ -37,7 +36,7 @@ Any NVIDIA GPUs with at least 4GB memory should be sufficient.
 
 1. Clone the repository
 ~~~
-git clone https://github.com/jessemelpolio/Faster_RCNN_for_DOTA.git
+git clone https://github.com/satrec-initiative/Faster_RCNN_for_DOTA.git
 ~~~
 2. For Windows users, run ``cmd .\init.bat``. For Linux user, run `sh ./init.sh`. The scripts will build cython module automatically and create some folders.
 
