@@ -19,7 +19,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description='Train Faster-RCNN network')
     # general
     parser.add_argument('--cfg', help='experiment configure file name', type=str,
-                        default='Faster_RCNN_for_DOTA/experiments/faster_rcnn/cfgs/DOTA_custom.yaml')
+                        default='/home/hyejin/Faster_RCNN_for_DOTA/experiments/faster_rcnn/cfgs/DOTA_custom.yaml')
 
     args, rest = parser.parse_known_args()
     # update config

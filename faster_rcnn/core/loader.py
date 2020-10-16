@@ -698,8 +698,12 @@ class QuadrangleAnchorLoader(mx.io.DataIter):
 
     def next(self):
         if self.iter_next():
-            self.get_batch_individual()
-            self.cur += self.batch_size
+            try:
+                self.get_batch_individual()
+            except ValueError:
+                self.cur += self.batch_size
+                self.get_batch_individual()
+                self.cur += self.batch_size
             return mx.io.DataBatch(data=self.data, label=self.label,
                                    pad=self.getpad(), index=self.getindex(),
                                    provide_data=self.provide_data, provide_label=self.provide_label)

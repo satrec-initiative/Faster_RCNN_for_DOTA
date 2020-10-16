@@ -14,7 +14,7 @@ default:
   kvstore: device
 network:
 #  pretrained: "model/pretrained_model/resnet_v1_101"
-  pretrained: "Faster_RCNN_for_DOTA/model/pretrained_model/resnet_v1_101"
+  pretrained: "/home/hyejin/Faster_RCNN_for_DOTA/model/pretrained_model/resnet_v1_101"
   pretrained_epoch: 0
   PIXEL_MEANS:
   - 103.06
@@ -53,10 +53,8 @@ network:
 dataset:
   NUM_CLASSES: 16
   dataset: DOTA_custom
-#  dataset_path: "/data/dj/dota/dota-split"
   dataset_path: "/media/hyejin/My Passport/Files/데이터/DOTA/TrainingSet"
   image_set: TrainingSet
-#  root_path: "/home/dj/data/"
   root_path: "/media/hyejin/My Passport/Files/데이터/DOTA"
   test_image_set: TestingSet
   proposal: rpn
