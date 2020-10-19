@@ -3,6 +3,7 @@
 # Copyright (c) 2017 Microsoft
 # Licensed under The Apache-2.0 License [see LICENSE for details]
 # Written by Yi Li
+# Modified by Heewoong Lee
 # --------------------------------------------------------
 
 from skimage.draw import polygon

@@ -3,6 +3,7 @@
 # Copyright (c) 2017 Microsoft
 # Licensed under The Apache-2.0 License [see LICENSE for details]
 # Modified by Haozhi Qi, from py-faster-rcnn (https://github.com/rbgirshick/py-faster-rcnn)
+# Modified by Heewoong Lee
 # --------------------------------------------------------
 """
 given a pascal voc imdb, compute mAP

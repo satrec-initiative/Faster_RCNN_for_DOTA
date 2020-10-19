@@ -4,6 +4,7 @@
 # Copyright (c) 2017 Microsoft
 # Licensed under The Apache-2.0 License [see LICENSE for details]
 # Modified by Yuwen Xiong
+# Modified by Heewoong Lee
 # --------------------------------------------------------
 
 import numpy as np
@@ -694,6 +695,7 @@ class QuadrangleAnchorLoader(mx.io.DataIter):
                 np.random.shuffle(self.index)
 
     def iter_next(self):
+        print(self.cur + self.batch_size)
         return self.cur + self.batch_size <= self.size
 
     def next(self):

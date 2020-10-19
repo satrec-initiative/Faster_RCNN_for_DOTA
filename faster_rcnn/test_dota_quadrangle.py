@@ -4,7 +4,8 @@
 # Copyright (c) 2017 Microsoft
 # Licensed under The Apache-2.0 License [see LICENSE for details]
 # Modified by Yuwen Xiong
-# --------------------------------------------------------		
+# Modified by Heewoong Lee
+# --------------------------------------------------------
 										  
 import _init_paths
 
